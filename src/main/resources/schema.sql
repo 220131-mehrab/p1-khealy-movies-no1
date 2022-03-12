@@ -17,4 +17,5 @@ CREATE TABLE "user" (
 
 CREATE INDEX "IFK_userChoice" ON "user" ("movieID");
 
-
+INSERT INTO "movie" VALUES (1, 'No Highway');
+INSERT INTO "movie" VALUES (2, 'Highway No');

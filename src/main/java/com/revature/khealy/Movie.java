@@ -1,17 +1,24 @@
 package com.revature.khealy;
 
-public class Movies {
+public class Movie {
 
-    private int MovieID;
+    private int movieID;
     private String title;
     private String Overview; //brief description about movie from imbd.com
     private String relesedate;
     
+    public Movie(){
+        
+    }
+    public Movie(int ID, String title) {
+        movieID = ID; 
+        this.title = title;
+    }
     public int getMovieID() {
-        return MovieID;
+        return movieID;
     }
     public void setMovieID(int movieID) {
-        MovieID = movieID;
+        this.movieID = movieID;
     }
     public String getTitle() {
         return title;
@@ -32,12 +39,8 @@ public class Movies {
         this.relesedate = relesedate;
     }
 
-
-
-
-
-
-
-
+    public static Movie of(){
+        return new Movie();
+    }
     
 }

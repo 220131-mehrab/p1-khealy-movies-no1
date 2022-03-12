@@ -18,26 +18,85 @@ import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.h2.message.DbException;
 
+import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
+//Curl statements to test
+//curl localhost:8080/movies
+//curl -X POST -d '{"movieID":3 "title":"no highway"}' localhost:8080/movies
 
 //import static com.fasterxml.jackson.databind.cfg.CoercionInputShape.String;
 
 public class App {
-    public String name = new String("me");
-    public List<String> movies = new ArrayList<>();
-    public static void main(String[] args) {
 
+    String movieJason = "{\"adult\":false,\"backdrop_path\":\"/tY6zVyt0OubPgCapbXFJLKhQqSu.jpg\",\"belongs_to_collection\":null,\"budget\":1350000,\"genres\":[{\"id\":35,\"name\":\"Comedy\"},{\"id\":80,\"name\":\"Crime\"}],\"homepage\":\"http://www.universalstudiosentertainment.com/lock-stock-and-two-smoking-barrels/\",\"id\":100,\"imdb_id\":\"tt0120735\",\"original_language\":\"en\",\"original_title\":\"Lock, Stock and Two Smoking Barrels\",\"overview\":\"A card shark and his unwillingly-enlisted friends need to make a lot of cash quick after losing a sketchy poker match. To do this they decide to pull a heist on a small-time gang who happen to be operating out of the flat next door.\",\"popularity\":7.119,\"poster_path\":\"/8kSerJrhrJWKLk1LViesGcnrUPE.jpg\",\"production_companies\":[{\"id\":491,\"logo_path\":\"/rUp0lLKa1pr4UsPm8fgzmnNGxtq.png\",\"name\":\"Summit Entertainment\",\"origin_country\":\"US\"},{\"id\":21920,\"logo_path\":null,\"name\":\"The Steve Tisch Company\",\"origin_country\":\"\"},{\"id\":13419,\"logo_path\":null,\"name\":\"SKA Films\",\"origin_country\":\"\"},{\"id\":1382,\"logo_path\":\"/sOg7LGESPH5vCTOIdbMhLuypoLL.png\",\"name\":\"PolyGram Filmed Entertainment\",\"origin_country\":\"US\"},{\"id\":20076,\"logo_path\":\"/i9qXGJIP9fGN22PP5jXUVENbyHi.png\",\"name\":\"HandMade Films\",\"origin_country\":\"GB\"}],\"production_countries\":[{\"iso_3166_1\":\"GB\",\"name\":\"United Kingdom\"}],\"release_date\":\"1998-03-05\",\"revenue\":28356188,\"runtime\":105,\"spoken_languages\":[{\"iso_639_1\":\"en\",\"name\":\"English\"}],\"status\":\"Released\",\"tagline\":\"A Disgrace to Criminals Everywhere.\",\"title\":\"Lock, Stock and Two Smoking Barrels\",\"video\":false,\"vote_average\":8.2,\"vote_count\":4048}";  
+    public static void main(String[] args) throws SQLException {
+        List<Movie> movies = new ArrayList<>();
         //--get json strings from database
-        //--
+        String url = "jdbc:h2:mem:test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;INIT=runscript from 'classpath:schema.sql'";
+        String username = "kevin";
+        String password = "";
+        Connection connection = DriverManager.getConnection(url, username, password);
 
-        
+        HttpServlet movieServlet = new HttpServlet() {
+            @Override
+            protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+                    throws ServletException, IOException {
+                try {
+                    ResultSet moviesrs = connection.prepareStatement("select * from movie").executeQuery();
+                    while (moviesrs.next()) {
+                        movies.add(new Movie(moviesrs.getInt("MovieID"), moviesrs.getString("title")));
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Failed to retrieve from db: " + e.getSQLState());
+                }
+
+                // Get a JSON Mapper
+                ObjectMapper mapper = new ObjectMapper();
+                String results = mapper.writeValueAsString(movies);
+                resp.setContentType("application/json");
+                resp.getWriter().println(results);
+            }
+
+
+            /**
+             * Gives values from json string to movie object then posts on sql server.
+             * @param req
+             * @param resp
+             * @throws ServletException
+             * @throws IOException
+             */
+            @Override
+            protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+                    throws ServletException, IOException {
+                ObjectMapper mapper = new ObjectMapper();
+                Movie newMovie = mapper.readValue(req.getInputStream(),Movie.class);
+                try {
+                    PreparedStatement stmt = connection.prepareStatement("insert into movie values (?,?)");
+                    stmt.setInt(1, newMovie.getMovieID());
+                    stmt.setString(2, newMovie.getTitle());
+                    stmt.executeUpdate();
+                } catch (SQLException e) {
+                    System.err.println("Failed to insert: " + e.getMessage());
+                }
+            }
+        };
+
+/*      
         HttpServlet movieServlet = new HttpServlet() {
 
             @Override
             protected void doGet(HttpServletRequest req, HttpServletResponse resp)
                     throws ServletException, IOException {
                 ObjectMapper objectMapper = new ObjectMapper();
+
                 String movieJason = "{\"adult\":false,\"backdrop_path\":\"/tY6zVyt0OubPgCapbXFJLKhQqSu.jpg\",\"belongs_to_collection\":null,\"budget\":1350000,\"genres\":[{\"id\":35,\"name\":\"Comedy\"},{\"id\":80,\"name\":\"Crime\"}],\"homepage\":\"http://www.universalstudiosentertainment.com/lock-stock-and-two-smoking-barrels/\",\"id\":100,\"imdb_id\":\"tt0120735\",\"original_language\":\"en\",\"original_title\":\"Lock, Stock and Two Smoking Barrels\",\"overview\":\"A card shark and his unwillingly-enlisted friends need to make a lot of cash quick after losing a sketchy poker match. To do this they decide to pull a heist on a small-time gang who happen to be operating out of the flat next door.\",\"popularity\":7.119,\"poster_path\":\"/8kSerJrhrJWKLk1LViesGcnrUPE.jpg\",\"production_companies\":[{\"id\":491,\"logo_path\":\"/rUp0lLKa1pr4UsPm8fgzmnNGxtq.png\",\"name\":\"Summit Entertainment\",\"origin_country\":\"US\"},{\"id\":21920,\"logo_path\":null,\"name\":\"The Steve Tisch Company\",\"origin_country\":\"\"},{\"id\":13419,\"logo_path\":null,\"name\":\"SKA Films\",\"origin_country\":\"\"},{\"id\":1382,\"logo_path\":\"/sOg7LGESPH5vCTOIdbMhLuypoLL.png\",\"name\":\"PolyGram Filmed Entertainment\",\"origin_country\":\"US\"},{\"id\":20076,\"logo_path\":\"/i9qXGJIP9fGN22PP5jXUVENbyHi.png\",\"name\":\"HandMade Films\",\"origin_country\":\"GB\"}],\"production_countries\":[{\"iso_3166_1\":\"GB\",\"name\":\"United Kingdom\"}],\"release_date\":\"1998-03-05\",\"revenue\":28356188,\"runtime\":105,\"spoken_languages\":[{\"iso_639_1\":\"en\",\"name\":\"English\"}],\"status\":\"Released\",\"tagline\":\"A Disgrace to Criminals Everywhere.\",\"title\":\"Lock, Stock and Two Smoking Barrels\",\"video\":false,\"vote_average\":8.2,\"vote_count\":4048}";
                     String movieTitle = objectMapper.writeValueAsString(movieJason);
                     resp.setContentType("application/json");
@@ -45,7 +104,7 @@ public class App {
                 }
             };
             
-        
+ */       
 
         Tomcat server = new Tomcat(); 
         server.getConnector();
@@ -64,6 +123,7 @@ public class App {
 
             }
         }).addMapping("/*");
+
         server.addServlet("", "movieServlet", movieServlet).addMapping("/movies");
         try {
             server.start();
