@@ -1,24 +1,25 @@
-var welcomeMsg = 'Music App';
+var welcomeMsg = 'Movie App';
 document.querySelector('h1').innerText = welcomeMsg;
 
-fetch('/movies').then(resp => resp.json()).then(artists => {
-        document.querySelector('#movies').innerHTML = listArtists(artists);
+fetch('/movies').then(resp => resp.json()).then(Movie => {
+        document.querySelector('#movies').innerHTML = listMovie(Movie);
     }
 );
 
-function listArtists(json) {
-    return `${json.map(listArtist).join('\n')}`;
+function listMovie(json) {
+    return `${json.map(listMovie).join('\n')}`;
 };
 
 let listMovie = function(Movie) {
-    return '<p>' + Movie.movieID + ": " + movie.title + '</p>';
+    return '<p>' + Movie.movieID + ": " + Movie.title + '</p>';
 };
 
 function postMovie() {
     let Movie = {
         "MovieID": document.getElementById("movieID").value,
-        "name": document.getElementById("title").value
+        "title": document.getElementById("title").value
     }
+
     console.log(Movie);
     fetch('/movies', {
         method: "POST",
@@ -26,7 +27,7 @@ function postMovie() {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(artist)
+        body: JSON.stringify(Movie)
     }).then((result) => {
         if (result.status != 200) {
             throw new Error("Bad Server Response");
@@ -34,7 +35,7 @@ function postMovie() {
         console.log(result.text());
     }).catch((error) => { console.log(error); })
     fetch('/movies').then(resp => resp.json()).then(movies => {
-            document.querySelector('#movies').innerHTML = listMovie(movie);
+            document.querySelector('#movies').innerHTML = listMovie(Movie);
         }
     );
 }

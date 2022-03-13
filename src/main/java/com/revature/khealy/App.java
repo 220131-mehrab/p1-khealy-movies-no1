@@ -31,7 +31,7 @@ import java.util.List;
 //Curl statements to test
 //curl localhost:8080/movies
 //curl -X POST -d '{"movieID":3 "title":"no highway"}' localhost:8080/movies
-//https://www.rfc-editor.org/rfc/rfc4627
+
 //import static com.fasterxml.jackson.databind.cfg.CoercionInputShape.String;
 
 public class App {
@@ -40,7 +40,7 @@ public class App {
     public static void main(String[] args) throws SQLException {
         List<Movie> movies = new ArrayList<>();
         //--get json strings from database
-        String url = "jdbc:h2:mem:test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;INIT=runscript from 'classpath:schema.sql'";
+        String url = "jdbc:h2:~/test;INIT=runscript from 'classpath:schema.sql'";
         //MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;";
         String username = "Kevin";
         String password = "";
@@ -51,17 +51,9 @@ public class App {
                     throws ServletException, IOException {
                 try {
                     ResultSet moviesrs = connection.prepareStatement("select * from movie").executeQuery();
-                    System.out.println("got result!");
                     while (moviesrs.next()) {
-                        System.err.println("getting first!!!");
-                        movies.add(new Movie(moviesrs.getInt("movieID"),
-                                moviesrs.getString("title"),
-                                moviesrs.getString("overview"),
-                                moviesrs.getString("releaseDate"),
-                                20
-                                ));
+                        movies.add(new Movie(moviesrs.getInt("MovieID"), moviesrs.getString("title")));
                     }
-                    System.out.println("assigned to movies");
                 } catch (SQLException e) {
                     System.err.println("Failed to retrieve from db: " + e.getSQLState());
                 }
@@ -72,6 +64,7 @@ public class App {
                 resp.setContentType("application/json");
                 resp.getWriter().println(results);
             }
+
 
             /**
              * Gives values from json string to movie object then posts on sql server.
@@ -86,12 +79,9 @@ public class App {
                 ObjectMapper mapper = new ObjectMapper();
                 Movie newMovie = mapper.readValue(req.getInputStream(),Movie.class);
                 try {
-                    PreparedStatement stmt = connection.prepareStatement("insert into movie values (?,?,?,?,?)");
+                    PreparedStatement stmt = connection.prepareStatement("insert into movie values (?,?)");
                     stmt.setInt(1, newMovie.getMovieID());
                     stmt.setString(2, newMovie.getTitle());
-                    stmt.setString(3,newMovie.getRelesedate());
-                    stmt.setString(4,newMovie.getOverview());
-                    stmt.setInt(5,newMovie.getCost());
                     stmt.executeUpdate();
                 } catch (SQLException e) {
                     System.err.println("Failed to insert: " + e.getMessage());
