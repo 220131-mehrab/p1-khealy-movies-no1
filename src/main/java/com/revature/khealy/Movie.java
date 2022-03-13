@@ -4,8 +4,9 @@ public class Movie {
 
     private int movieID;
     private String title;
-    private String Overview; //brief description about movie from imbd.com
-    private String relesedate;
+    private String overview; //brief description about movie from imbd.com
+    private String releaseDate;
+    private int cost;
     
     public Movie(){
         
@@ -14,6 +15,22 @@ public class Movie {
         movieID = ID; 
         this.title = title;
     }
+
+    public Movie(int ID, String title, String overview, String releaseDate) {
+        movieID = ID;
+        this.title = title;
+        this.overview = overview;
+        this.releaseDate = releaseDate;
+    }
+
+    public Movie(int ID, String title, String overview, String releaseDate, int cost) {
+        movieID = ID;
+        this.title = title;
+        this.overview = overview;
+        this.releaseDate = releaseDate;
+        this.cost = cost;
+    }
+
     public int getMovieID() {
         return movieID;
     }
@@ -27,20 +44,31 @@ public class Movie {
         this.title = title;
     }
     public String getOverview() {
-        return Overview;
+        return overview;
     }
     public void setOverview(String overview) {
-        Overview = overview;
+        overview = overview;
     }
     public String getRelesedate() {
-        return relesedate;
+        return releaseDate;
     }
-    public void setRelesedate(String relesedate) {
-        this.relesedate = relesedate;
+    public void setReleaseDate(String relesedate) {
+        this.releaseDate = relesedate;
     }
+    public int getCost(){return this.cost;}
 
     public static Movie of(){
         return new Movie();
     }
-    
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "movieID=" + movieID +
+                ", title='" + title + '\'' +
+                ", Overview='" + overview + '\'' +
+                ", relese_date='" + releaseDate + '\'' +
+                ", cost='" + cost + '\'' +
+                '}';
+    }
 }
