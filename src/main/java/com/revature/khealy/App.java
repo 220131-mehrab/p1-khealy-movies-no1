@@ -53,11 +53,12 @@ public class App {
                     ResultSet moviesrs = connection.prepareStatement("select * from movie").executeQuery();
                     while (moviesrs.next()) {
                         movies.add(new Movie(moviesrs.getInt("movieID"),
-                                moviesrs.getString("title")
-                                /*
+                                moviesrs.getString("title"),
                                 moviesrs.getString("overview"),
-                                moviesrs.getString("release_date"),
-                                20*/
+                                
+                                moviesrs.getString("releaseDate"),
+                                
+                                20
                                 ));
                     }
                 } catch (SQLException e) {

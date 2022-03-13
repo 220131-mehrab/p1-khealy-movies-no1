@@ -16,12 +16,16 @@ let listMovie = function(Movie) {
 
 function postMovie() {
     let Movie = {
-        "MovieID": document.getElementById("movieID").value,
+        "movieID": document.getElementById("movieID").value,
         "title": document.getElementById("title").value
     }
 
     console.log(Movie);
-    console.log(Movie.MovieID);
+    console.log(Movie.movieID);
+    console.log(Movie.title);
+    console.log(Movie.overview);
+    console.log(Movie.releaseDate);
+    console.log(Movie.cost);
     fetch('/movies', {
         method: "POST",
         headers: {

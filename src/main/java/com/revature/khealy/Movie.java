@@ -15,7 +15,11 @@ public class Movie {
         movieID = ID; 
         this.title = title;
     }
-
+    public Movie(int ID, String title, String overview) {
+        movieID = ID;
+        this.title = title;
+        this.overview = overview;
+    }
     public Movie(int ID, String title, String overview, String releaseDate) {
         movieID = ID;
         this.title = title;
