@@ -6,7 +6,7 @@ fetch('/movies').then(resp => resp.json()).then(Movie => {
     }
 );
 
-function listMovie(json) {
+function listMovies(json) {
     return `${json.map(listMovie).join('\n')}`;
 };
 
@@ -21,12 +21,14 @@ function postMovie() {
     }
 
     console.log(Movie);
+    console.log(Movie.MovieID);
     fetch('/movies', {
         method: "POST",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
+        
         body: JSON.stringify(Movie)
     }).then((result) => {
         if (result.status != 200) {
