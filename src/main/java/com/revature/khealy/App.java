@@ -51,14 +51,17 @@ public class App {
                     throws ServletException, IOException {
                 try {
                     ResultSet moviesrs = connection.prepareStatement("select * from movie").executeQuery();
+                    System.out.println("got result!");
                     while (moviesrs.next()) {
+                        System.err.println("getting first!!!");
                         movies.add(new Movie(moviesrs.getInt("movieID"),
                                 moviesrs.getString("title"),
                                 moviesrs.getString("overview"),
-                                moviesrs.getString("release_date"),
+                                moviesrs.getString("releaseDate"),
                                 20
                                 ));
                     }
+                    System.out.println("assigned to movies");
                 } catch (SQLException e) {
                     System.err.println("Failed to retrieve from db: " + e.getSQLState());
                 }
