@@ -1,8 +1,8 @@
 var welcomeMsg = 'Movie App';
 document.querySelector('h1').innerText = welcomeMsg;
 
-fetch('/movies').then(resp => resp.json()).then(Movie => {
-        document.querySelector('#movies').innerHTML = listMovie(Movie);
+fetch('/movies').then(resp => resp.json()).then(movies => {
+        document.querySelector('#movies').innerHTML = listMovies(movies);
     }
 );
 
@@ -10,12 +10,12 @@ function listMovies(json) {
     return `${json.map(listMovie).join('\n')}`;
 };
 
-let listMovie = function(Movie) {
-    return '<p>' + Movie.movieID + ": " + Movie.title + '</p>';
+let listMovie = function(movie) {
+    return '<p>' + movie.movieID + ": " + movie.title + '</p>';
 };
 
 function postMovie() {
-    let Movie = {
+    let movie = {
         "movieID": document.getElementById("movieID").value,
         "title": document.getElementById("title").value,
         "overview": document.getElementById("overview").value,
@@ -23,27 +23,28 @@ function postMovie() {
         "cost": document.getElementById("cost").value
     }
 
-    console.log(Movie);
-    console.log(Movie.movieID);
-    console.log(Movie.title);
-    console.log(Movie.overview);
-    console.log(Movie.releaseDate);
-    console.log(Movie.cost);
+    console.log(movie);
+    console.log(movie.movieID);
+    console.log(movie.title);
+    console.log(movie.overview);
+    console.log(movie.releaseDate);
+    console.log(movie.cost);
     fetch('/movies', {
         method: "POST",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(Movie)
+        body: JSON.stringify(movie)
     }).then((result) => {
         if (result.status != 200) {
             throw new Error("Bad Server Response");
         }
         console.log(result.text());
     }).catch((error) => { console.log(error); })
+    
     fetch('/movies').then(resp => resp.json()).then(movies => {
-            document.querySelector('#movies').innerHTML = listMovies(Movie);
+            document.querySelector('#movies').innerHTML = listMovies(movies);
         }
     );
 }

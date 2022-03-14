@@ -15,7 +15,7 @@ CREATE TABLE "user" (
     "creditCard" VARCHAR,
     "userChoice" INT NOT NULL,
     CONSTRAINT "PK_user" PRIMARY KEY ("userID"),
-    CONSTRAINT "FK_userChoice" FOREIGN KEY ("userID") REFERENCES "movie" ("movieID")
+    CONSTRAINT "FK_userChoice" FOREIGN KEY ("userID") REFERENCES "movie" ("movieID") ON DELETE NO ACTION ON UPDATE NO ACTION
     );
 
 --CREATE INDEX "IFK_userChoice" ON "user" ("userID");
