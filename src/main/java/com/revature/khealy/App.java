@@ -52,14 +52,16 @@ public class App {
                 try {
                     ResultSet moviesrs = connection.prepareStatement("select * from movie").executeQuery();
                     while (moviesrs.next()) {
-                        movies.add(new Movie(moviesrs.getInt("movieID"),
-                                moviesrs.getString("title"),
-                                moviesrs.getString("overview"),
-                                
-                                moviesrs.getString("releaseDate"),
-                                
-                                20
-                                ));
+                        Movie tempMovie = new Movie(
+                            moviesrs.getInt("movieID"), 
+                            moviesrs.getString("imdb_id"),//almost forgot this.
+                            moviesrs.getString("title"),
+                            moviesrs.getString("overview"),
+                            moviesrs.getString("releaseDate"),
+                            moviesrs.getInt("cost")
+                            );
+                        movies.add(tempMovie);
+                        System.err.println(tempMovie.toString());
                     }
                 } catch (SQLException e) {
                     System.err.println("Failed to retrieve from db: " + e.getSQLState());
@@ -96,7 +98,7 @@ public class App {
                     System.err.println("Failed to insert: " + e.getMessage());
                 }
             }
-        };
+        };// .addmapping(/movies)
 
 /*      
         HttpServlet movieServlet = new HttpServlet() {

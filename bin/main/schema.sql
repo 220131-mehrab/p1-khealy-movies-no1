@@ -1,5 +1,6 @@
 CREATE TABLE "movie" ( 
     "movieID" INT PRIMARY KEY NOT NULL,
+    "imdb_id" VARCHAR NOT NULL,
     "title" VARCHAR NOT NULL,
     "overview" VARCHAR,
     "releaseDate" VARCHAR,
@@ -19,5 +20,5 @@ CREATE TABLE "user" (
 
 --CREATE INDEX "IFK_userChoice" ON "user" ("userID");
 
-INSERT INTO "movie" VALUES(1, 'No Highway', 'plane crashed', '1-1-1950', 2);
-INSERT INTO "movie" VALUES(2, 'Highway No', 'crashed plane', '1-1-1950', 3);
+INSERT INTO "movie" VALUES(1, 'XXXXSKY1', 'No Highway1', 'plane crashed1', '1-1-1950', 1);
+INSERT INTO "movie" VALUES(2, 'XXXXSKY2', 'Highway No2', 'crashed plane2', '1-2-1950', 2);

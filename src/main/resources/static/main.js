@@ -17,7 +17,10 @@ let listMovie = function(Movie) {
 function postMovie() {
     let Movie = {
         "movieID": document.getElementById("movieID").value,
-        "title": document.getElementById("title").value
+        "title": document.getElementById("title").value,
+        "overview": document.getElementById("overview").value,
+        "releaseDate": document.getElementById("releaseDate").value,
+        "cost": document.getElementById("cost").value
     }
 
     console.log(Movie);
@@ -32,7 +35,6 @@ function postMovie() {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        
         body: JSON.stringify(Movie)
     }).then((result) => {
         if (result.status != 200) {
@@ -41,7 +43,7 @@ function postMovie() {
         console.log(result.text());
     }).catch((error) => { console.log(error); })
     fetch('/movies').then(resp => resp.json()).then(movies => {
-            document.querySelector('#movies').innerHTML = listMovie(Movie);
+            document.querySelector('#movies').innerHTML = listMovies(Movie);
         }
     );
 }
