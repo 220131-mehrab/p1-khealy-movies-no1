@@ -58,7 +58,7 @@ public class App {
                             moviesrs.getString("title"),
                             moviesrs.getString("overview"),
                             moviesrs.getString("releaseDate"),
-                            moviesrs.getInt("cost")
+                            moviesrs.getFloat("cost")
                             );
                         movies.add(tempMovie);
                         System.err.println(tempMovie.toString());
@@ -87,12 +87,13 @@ public class App {
                 ObjectMapper mapper = new ObjectMapper();
                 Movie newMovie = mapper.readValue(req.getInputStream(),Movie.class);
                 try {
-                    PreparedStatement stmt = connection.prepareStatement("insert into movie values (?,?,?,?,?)");
+                    PreparedStatement stmt = connection.prepareStatement("insert into movie values (?,?,?,?,?,?)");
                     stmt.setInt(1, newMovie.getMovieID());
-                    stmt.setString(2, newMovie.getTitle());
-                    stmt.setString(3,newMovie.getRelesedate());
-                    stmt.setString(4,newMovie.getOverview());
-                    stmt.setInt(5,newMovie.getCost());
+                    stmt.setString(2, newMovie.getImdb_id());
+                    stmt.setString(3, newMovie.getTitle());
+                    stmt.setString(4, newMovie.getRelesedate());
+                    stmt.setString(5, newMovie.getOverview());
+                    stmt.setFloat(6, newMovie.getCost());
                     stmt.executeUpdate();
                 } catch (SQLException e) {
                     System.err.println("Failed to insert: " + e.getMessage());

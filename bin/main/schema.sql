@@ -4,7 +4,7 @@ CREATE TABLE "movie" (
     "title" VARCHAR NOT NULL,
     "overview" VARCHAR,
     "releaseDate" VARCHAR,
-    "cost" INT NOT NULL
+    "cost" FLOAT NOT NULL
 );
 
 CREATE TABLE "user" (

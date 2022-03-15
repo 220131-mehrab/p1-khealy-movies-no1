@@ -60,7 +60,7 @@ public class AppTests {
             stmt.setString(3, newMovie.getTitle());
             stmt.setString(4, newMovie.getRelesedate());
             stmt.setString(5, newMovie.getOverview());
-            stmt.setInt(6, newMovie.getCost());
+            stmt.setFloat(6, newMovie.getCost());
             stmt.executeUpdate();
 
             ResultSet moviesrs = connection.prepareStatement("select * from movie").executeQuery();
@@ -71,7 +71,7 @@ public class AppTests {
                     moviesrs.getString("title"),
                     moviesrs.getString("overview"),
                     moviesrs.getString("releaseDate"),
-                    moviesrs.getInt("cost")
+                    moviesrs.getFloat("cost")
                     );
                 Movie tempMovie = movie;
                 movies.add(tempMovie);
@@ -89,7 +89,7 @@ public class AppTests {
 
         mve = Movie.of().movieID(1).title("No Highway in the Sky").imdb_id("xxxxxxsky").overview("James Steuwart Saves the day.").releaseDate("1-1-1950").cost(1);
         System.err.println("running test for movie assignment: "+ mve.toString());
-        Assertions.assertEquals("Movie [movieID=1, imdb_id=xxxxxxsky, overview=James Steuwart Saves the day., releaseDate=1-1-1950, title=No Highway in the Sky, cost=1]",mve.toString());
+        Assertions.assertEquals("Movie [movieID=1, imdb_id=xxxxxxsky, overview=James Steuwart Saves the day., releaseDate=1-1-1950, title=No Highway in the Sky, cost=1.0]",mve.toString());
 
     }
 }

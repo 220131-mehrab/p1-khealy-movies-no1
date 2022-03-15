@@ -7,7 +7,7 @@ public class Movie {
     private String title;
     private String overview; //brief description about movie from imbd.com
     private String releaseDate;
-    private int cost;
+    private float cost;
     
     public Movie(){
         
@@ -28,7 +28,7 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
-    public Movie(int ID, String imdb_id, String title, String overview, String releaseDate, int cost) {
+    public Movie(int ID, String imdb_id, String title, String overview, String releaseDate, float cost) {
         movieID = ID;
         this.imdb_id = imdb_id;
         this.title = title;
@@ -68,8 +68,8 @@ public class Movie {
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
-    public int getCost(){return this.cost;}
-    public void setCost(int cost) {
+    public float getCost(){return this.cost;}
+    public void setCost(float cost) {
         this.cost = cost;
     } 
     
@@ -99,7 +99,7 @@ public class Movie {
         this.releaseDate = releaseDate;
         return this;
     }
-    Movie cost(int cost) {
+    Movie cost(float cost) {
         this.cost = cost;
         return this;
     }
