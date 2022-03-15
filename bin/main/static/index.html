@@ -10,6 +10,7 @@
 	
 		<form style="border:orange; border-width:5px; border-style:solid;" action="/movies" method="post">
 			Id: <pre>&#9<input type="number" name="movieID" id="movieID"/></pre>
+			Internat Movie Id: <pre>&#9<input type="number" name="imdb_id" id="imdb_id"/></pre>
 			Title: <pre>&#9<input type="text" name="title" id="title"/></pre>
 			Overview:<pre>&#9<input type="text" name="overview" id="overview"/></pre>
 			Release Date:<pre>&#9<input type="text" name="releaseDate" id="releaseDate"/></pre>
@@ -18,14 +19,7 @@
 		</form>
 	
     <div id="movies"></div>
-<pre>
- public class Movie {
 
-    private int movieID;
-    private String title;
-    private String overview; //brief description about movie from imbd.com
-    private String releaseDate;
-    private int cost; </pre>
     <script src="main.js"></script>
 </body>
 

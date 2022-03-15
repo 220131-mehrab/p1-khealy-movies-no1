@@ -40,7 +40,7 @@ function postMovie() {
         if (result.status != 200) {
             throw new Error("Bad Server Response");
         }
-        console.log(result.text());
+        console.log("text sent");
     }).catch((error) => { console.log(error); })
     
     fetch('/movies').then(resp => resp.json()).then(movies => {
