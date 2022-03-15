@@ -43,12 +43,10 @@ function postMovie() {
             throw new Error("Bad Server Response");
         }
         console.log("text sent");
-    }).catch((error) => { console.log(error); })
-    
-    fetch('/movies').then(resp => resp.json()).then(movies => {
+        fetch('/movies').then(resp => resp.json()).then(movies => {
             document.querySelector('#movies').innerHTML = listMovies(movies);
-        }
-    );
+        })}
+    ).catch((error) => { console.log(error); })
 }
 
 let button = document.querySelector('button');
