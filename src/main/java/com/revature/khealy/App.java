@@ -24,9 +24,11 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.SQLTimeoutException;
 //import java.sql.Statement;
 //import java.util.ArrayList;
 //import java.util.List;
+import java.io.IOException;
 
 //Curl statements to test
 //curl localhost:8080/movies
@@ -62,20 +64,12 @@ public class App {
                             moviesrs.getFloat("cost")
                             );
                         movies.add(tempMovie);
-                        
-                        /*
-                        String result = mapper.writeValueAsString(tempMovie);
-                        resp.setContentType("application/json");
-                        resp.getWriter().println(result + ',');
-                        //System.err.println(tempMovie.toString());
-                        */
                     }
                 } catch (SQLException e) {
                     System.err.println("Failed to retrieve from db: " + e.getSQLState());
                 }
 
                 // Get a JSON Mapper
-                
                 ObjectMapper mapper = new ObjectMapper();
                 String result = mapper.writeValueAsString(movies);
                 resp.setContentType("application/json");
@@ -89,12 +83,16 @@ public class App {
              * @throws ServletException
              * @throws IOException
              */
-            @Overrid  e
+            @Override
             protected void doPost(HttpServletRequest req, HttpServletResponse resp)
                     throws ServletException, IOException {
-                ObjectMapper mapper = new ObjectMapper();
-                Movie newMovie = mapper.readValue(req.getInputStream(),Movie.class);
-                try {
+                DB db = new DB();
+                try{
+                    ObjectMapper mapper = new ObjectMapper();
+                    Movie newMovie = mapper.readValue(req.getInputStream(),Movie.class);
+                    db.insertIntoDB(newMovie, connection);
+                    /*
+                    
                     System.err.println("Inserting into DB.");
                     PreparedStatement stmt = connection.prepareStatement("insert into movie values (?,?,?,?,?,?)");
                     stmt.setInt(1, newMovie.getMovieID());
@@ -103,9 +101,18 @@ public class App {
                     stmt.setString(4, newMovie.getRelesedate());
                     stmt.setString(5, newMovie.getOverview());
                     stmt.setFloat(6, newMovie.getCost());
-                    stmt.executeUpdate();
-                } catch (SQLException e) {
-                    System.err.println("Failed to insert: " + e.getMessage());
+                    stmt.executeUpdate();*/
+                }catch (SQLTimeoutException t){
+                    System.err.println("SQL Timed out: " + t.getMessage());
+                }catch(SQLException e){
+                        System.err.println("SQL Error: ");
+                        // + e.getMessage() + e.getErrorCode());
+                        //if (e.getErrorCode() == 23505){
+                        //    resp = Integer.toString(e.getErrorCode());
+                } catch (IOException ioe){
+                    System.err.println("IO Error: " + ioe.getMessage());
+                } catch (Exception ge){
+                    System.err.println("General Error: " + ge.getMessage());
                 }
             }
         }; //.addmapping("/movies");
