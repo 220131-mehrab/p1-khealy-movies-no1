@@ -7,6 +7,9 @@
 
 #vs code
 bin/
+bin/*
+bin/**/*
+
 
 # User-specific stuff
 .idea/**/workspace.xml
