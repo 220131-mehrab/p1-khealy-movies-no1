@@ -43,20 +43,10 @@ function postMovie() {
             throw new Error("Bad Server Response");
         }
         console.log("text sent");
-<<<<<<< HEAD
         fetch('/movies').then(resp => resp.json()).then(movies => {
-=======
-<<<<<<< HEAD
-        fetch('/movies').then(resp => resp.json()).then(movies => {
-=======
-    }).catch((error) => { console.log(error); })
-    
-    fetch('/movies').then(resp => resp.json()).then(movies => {
->>>>>>> 71363de72f3275e9a362c9643f6bf38ac943cb28
->>>>>>> 7c6c4d575cff9c883966f8ad68c9102fa599cb09
             document.querySelector('#movies').innerHTML = listMovies(movies);
         })}
-    ).catch((error) => { console.log(error); })
+    ).catch((error) => { console.log("I got error: " + error); })
 }
 
 let button = document.querySelector('button');
