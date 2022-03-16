@@ -7,6 +7,9 @@
 
 #vs code
 ./bin/*
+bin/main/static/*
+C:\\Users\\kevin\\PRPT\\p1-khealy-movies-no1\\bin\\main\\static
+
 
 # User-specific stuff
 .idea/**/workspace.xml
