@@ -18,7 +18,8 @@ import java.util.List;
 public class DB {
     public ArrayList<Movie> movies = new ArrayList<>();
 
-    public void insertIntoDB(Movie newMovie,Connection connection) throws SQLTimeoutException, SQLException {
+    public void insertIntoDB(Movie newMovie,Connection connection) {
+        try{
             System.err.println("Inserting " + newMovie.toString() + " Into DB.");
 
             PreparedStatement stmt = connection.prepareStatement("insert into movie values (?,?,?,?,?,?)");
@@ -29,6 +30,14 @@ public class DB {
             stmt.setString(5, newMovie.getOverview());
             stmt.setFloat(6, newMovie.getCost());
             stmt.executeUpdate();
+
+        }catch (SQLTimeoutException t){
+                System.err.println("SQL Timed out: " + t.getMessage());
+        }catch(SQLException e){
+                System.err.println("SQL Error: " + e.getMessage() + e.getErrorCode());
+                //If (e.getErrorCode() == )
+        }catch(Exception ge){
+            System.err.println("General Error: " + ge.getMessage());
         }
     }
         

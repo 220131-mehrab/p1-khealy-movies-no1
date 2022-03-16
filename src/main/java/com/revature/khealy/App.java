@@ -102,17 +102,10 @@ public class App {
                     stmt.setString(5, newMovie.getOverview());
                     stmt.setFloat(6, newMovie.getCost());
                     stmt.executeUpdate();*/
-                }catch (SQLTimeoutException t){
-                    System.err.println("SQL Timed out: " + t.getMessage());
-                }catch(SQLException e){
-                        System.err.println("SQL Error: ");
-                        // + e.getMessage() + e.getErrorCode());
-                        //if (e.getErrorCode() == 23505){
-                        //    resp = Integer.toString(e.getErrorCode());
                 } catch (IOException ioe){
                     System.err.println("IO Error: " + ioe.getMessage());
-                } catch (Exception ge){
-                    System.err.println("General Error: " + ge.getMessage());
+                } catch (Exception e){
+                    System.err.println("General Error: " + e.getMessage());
                 }
             }
         }; //.addmapping("/movies");
