@@ -13,7 +13,7 @@ CREATE TABLE "user" (
     "userEmail" VARCHAR NOT NULL,
     "userPassword" VARCHAR,
     "creditCard" VARCHAR,
-    "userChoice" INT NOT NULL,
+    "userChoice" INT,
     CONSTRAINT "PK_user" PRIMARY KEY ("userID"),
     CONSTRAINT "FK_userChoice" FOREIGN KEY ("userID") REFERENCES "movie" ("movieID") ON DELETE NO ACTION ON UPDATE NO ACTION
     );
