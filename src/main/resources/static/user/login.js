@@ -1,21 +1,21 @@
 var welcomeMsg = 'Movie App';
+var subHeading = 'Login';
 document.querySelector('h1').innerText = welcomeMsg;
+document.querySelector('h3').innerText = subHeading;
 
-function Login() {
+
+
+function login() {
     let user = {
-
         "userName": document.getElementById("userName").value,
         "userEmail": document.getElementById("userEmail").value,
         "userPassword": document.getElementById("userPassword").value,
     }
 
-    console.log(movie);
-    console.log(movie.movieID);
-    console.log(movie.imdb_id);
-    console.log(movie.title);
-    console.log(movie.overview);
-    console.log(movie.releaseDate);
-    console.log(movie.cost);
+    console.log(user);
+    console.log(user.userName);
+    console.log(user.userEmail);
+    console.log(user.userPassword);
 
     const handleClick = (e) => {
           console.log("click")

@@ -15,13 +15,11 @@ let listMovie = function(movie) {
 };
 
 function postMovie() {
-    let movie = {
-        "movieID": document.getElementById("movieID").value,
-        "imdb_id": document.getElementById("imdb_id").value,
-        "title": document.getElementById("title").value,
-        "overview": document.getElementById("overview").value,
-        "releaseDate": document.getElementById("releaseDate").value,
-        "cost": document.getElementById("cost").value
+    let user = {
+
+        "userName": document.getElementById("userName").value,
+        "userEmail": document.getElementById("userEmail").value,
+        "userPassword": document.getElementById("userPassword").value,
     }
 
     console.log(movie);
