@@ -20,7 +20,7 @@ public class DefaultServlet extends HttpServlet {
         String mimeType = getServletContext().getMimeType(filename); //checks for type of file being imported
         resp.setContentType(mimeType);
         System.err.println(file);
-        //Assert file != null;
+        assert file != null;
         IOUtils.copy(file, resp.getOutputStream()); //copies file from the input to server
     }
 }

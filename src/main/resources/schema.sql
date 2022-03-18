@@ -10,10 +10,9 @@ CREATE TABLE "movie" (
 CREATE TABLE "user" (
     "userID" INT NOT NULL,
     "userName" VARCHAR NOT NULL,
-    "userEmail" VARCHAR NOT NULL,
-    "userPassword" VARCHAR,
-    "creditCard" VARCHAR,
-    "userChoice" INT,
+    "email" VARCHAR NOT NULL,
+    "password" VARCHAR,
+    "imdb_id" VARCHAR,
     CONSTRAINT "PK_user" PRIMARY KEY ("userID"),
     CONSTRAINT "FK_userChoice" FOREIGN KEY ("userID") REFERENCES "movie" ("movieID") ON DELETE NO ACTION ON UPDATE NO ACTION
     );

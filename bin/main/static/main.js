@@ -14,6 +14,7 @@ let listMovie = function(movie) {
     return '<p>' + movie.movieID + ": " + movie.title + '</p>';
 };
 
+
 function postMovie() {
     let movie = {
         "movieID": document.getElementById("movieID").value,
@@ -48,6 +49,14 @@ function postMovie() {
         })}
     ).catch((error) => { console.log(error); })
 }
+/*
+function toLogin(){
+   const handleClick = (e) => {
+          console.log("click")
+          window.location.pathname = ('user/login.html')
+          console.log(window.location)
+    }
+}*/
 
 let button = document.querySelector('button');
 button.addEventListener('mouseenter', function() {
