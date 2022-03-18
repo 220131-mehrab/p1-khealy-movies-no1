@@ -25,10 +25,15 @@ function login() {
               console.log(window.location)
         }
     }*/
-
+    /*
     let button = document.querySelector('button');
     button.addEventListener('click', function() {
         button.textContent = "Go!";
-        window.location.pathname = ('search/search.html')
-        })
+
+        })*/
+
+    //let url = "http://localhost:8080/search/search.html";
+    //location.href = url;
+    window.location.pathname = 'search/search.html';
+
 }

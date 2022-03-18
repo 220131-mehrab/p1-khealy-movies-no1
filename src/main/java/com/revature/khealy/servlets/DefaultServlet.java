@@ -19,7 +19,7 @@ public class DefaultServlet extends HttpServlet {
         InputStream file = getClass().getClassLoader().getResourceAsStream(resourceDir + filename); //loads src data into backend from static folder
         String mimeType = getServletContext().getMimeType(filename); //checks for type of file being imported
         resp.setContentType(mimeType);
-        System.err.println(file.toString());
+        System.err.println(file);
         //Assert file != null;
         IOUtils.copy(file, resp.getOutputStream()); //copies file from the input to server
     }
