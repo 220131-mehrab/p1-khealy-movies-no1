@@ -17,9 +17,18 @@ function login() {
     console.log(user.userEmail);
     console.log(user.userPassword);
 
-    const handleClick = (e) => {
-          console.log("click")
-          window.location.pathname = ('/userInput.html')
-          console.log(window.location)
-    }
+    /*
+    function toLogin(){
+       const handleClick = (e) => {
+              console.log("click")
+              window.location.pathname = ('user/login.html')
+              console.log(window.location)
+        }
+    }*/
+
+    let button = document.querySelector('button');
+    button.addEventListener('click', function() {
+        button.textContent = "Go!";
+        window.location.pathname = ('search/search.html')
+        })
 }
