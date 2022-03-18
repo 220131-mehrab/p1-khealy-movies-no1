@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
             stmt.setString(user.setImdb_id("X");
             stmt.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Failed to insert: " + e.getMessa e());
+            System.err.println("Failed to insert: " + e.getMessage());
         }
     }
 }
