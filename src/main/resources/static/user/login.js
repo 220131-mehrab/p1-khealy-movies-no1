@@ -19,6 +19,7 @@ function login() {
 
     const handleClick = (e) => {
           console.log("click")
-          window.location.pathname = ('/userSearch.html')
+          window.location.pathname = ('/userInput.html')
           console.log(window.location)
     }
+}
