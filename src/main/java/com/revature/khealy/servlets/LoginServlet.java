@@ -40,23 +40,19 @@ public class LoginServlet extends HttpServlet {
 
         System.out.println("doing post!!!");
         ObjectMapper mapper = new ObjectMapper();
-        User user = new User();
-        user.setUserID(150);
-        user.setImdb_id("X");
-        System.out.println(user.getUserID());
-        System.out.println(user.getImdb_id());
-        user = mapper.readValue(req.getInputStream(), User.class);
+        User user = mapper.readValue(req.getInputStream(), User.class);
         try {
             System.err.println("Inserting into DB.");
             PreparedStatement stmt = connection.prepareStatement("insert into user values (?,?,?,?,?)");
+            stmt.setInt(user.setUserID(150);
             stmt.setInt(1,user.getUserID());
             stmt.setString(2, user.getUserName());
             stmt.setString(3, user.getEmail());
             stmt.setString(4, user.getPassword());
-            stmt.setString(5, user.getImdb_id());
+            stmt.setString(user.setImdb_id("X");
             stmt.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Failed to insert: " + e.getMessage());
+            System.err.println("Failed to insert: " + e.getMessa e());
         }
     }
 }
