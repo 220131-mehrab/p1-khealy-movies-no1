@@ -2,7 +2,7 @@ package com.revature.khealy.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.khealy.Movie;
-import com.revature.khealy.User;
+import com.revature.khealy.User1;
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -40,16 +40,17 @@ public class LoginServlet extends HttpServlet {
 
         System.out.println("doing post!!!");
         ObjectMapper mapper = new ObjectMapper();
-        User user = mapper.readValue(req.getInputStream(), User.class);
+        User1 user = mapper.readValue(req.getInputStream(), User1.class);
+        user.setUserID(0);
+        user.setImdb_id("X");
         try {
             System.err.println("Inserting into DB.");
-            PreparedStatement stmt = connection.prepareStatement("insert into user values (?,?,?,?,?)");
-            stmt.setInt(user.setUserID(150);
+            PreparedStatement stmt = connection.prepareStatement("insert into user1 values (?,?,?,?,?)");
             stmt.setInt(1,user.getUserID());
             stmt.setString(2, user.getUserName());
             stmt.setString(3, user.getEmail());
             stmt.setString(4, user.getPassword());
-            stmt.setString(user.setImdb_id("X");
+            stmt.setString(5, user.getImdb_id());
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Failed to insert: " + e.getMessage());

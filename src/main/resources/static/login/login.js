@@ -7,7 +7,7 @@ document.querySelector('h3').innerText = subHeading;
 
 function login() {
     console.log("im starting login")
-    let User = {
+    let User1 = {
         "userID": document.getElementById("userID").value,
         "userName": document.getElementById("userName").value,
         "email": document.getElementById("email").value,
@@ -15,10 +15,10 @@ function login() {
         "imdb_id": "X"
     }
 
-    console.log(User);
-    console.log(User.userName);
-    console.log(User.email);
-    console.log(User.password);
+    console.log(User1);
+    console.log(User1.userName);
+    console.log(User1.email);
+    console.log(User1.password);
     fetch('/login', {
         method: "POST",
         headers: {
