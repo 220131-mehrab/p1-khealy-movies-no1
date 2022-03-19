@@ -4,14 +4,15 @@
 <title>Home Page</title>
 
 <body>
-<h1> Welcome !!!!!!!!!!!!!! </h1>
+<h1></h1>
+<h3></h3>
 
-<form style="border:orange; border-width:5px; border-style:solid;" action="/search" method="post">
+<form style="border:orange; border-width:5px; border-style:solid;" action="/search" method="get">
 
     International Movie Id: <pre>&#9<input type="text" name="imdb_id" id="imdb_id"/></pre>
     Title: <pre>&#9<input type="text" name="title" id="title"/></pre>
     Release Date:<pre>&#9<input type="text" name="releaseDate" id="releaseDate"/></pre>
-    <button type="button" onclick="searchMovie()">Add Movie</button>
+    <button type="button" onclick="searchMovies()">Search</button>
 </form>
 <button type="button" onclick="onclick=window.location.href='/checkout/checkout.html'" name="toLogin" id="toLogin" style="margin-Left:500px;">Start</button></br>
 <div style="center" id="movies"></div>

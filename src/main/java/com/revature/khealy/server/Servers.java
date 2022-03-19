@@ -1,6 +1,6 @@
 package com.revature.khealy.server;
 
-import com.revature.khealy.server.SearchServlet.SearchServlet;
+import com.revature.khealy.servlets.SearchServlet;
 import com.revature.khealy.servlets.DefaultServlet;
 import com.revature.khealy.servlets.LoginServlet;
 import com.revature.khealy.servlets.MovieServlet;

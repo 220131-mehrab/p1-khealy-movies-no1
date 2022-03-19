@@ -17,7 +17,7 @@ import java.util.List;
 
 
 
-public class DB {
+public class DBRetriver {
     public ArrayList<Movie> movies = new ArrayList<>();
 
     public void insertIntoDB(Movie newMovie,Connection connection) {
@@ -43,9 +43,9 @@ public class DB {
         }
     }
         
-    public ArrayList<Movie> getFromDB(Connection connection) {
+    public ArrayList<Movie> getFromDB(PreparedStatement statement) {
         try{
-            ResultSet moviesrs = connection.prepareStatement("select * from movie").executeQuery();
+            ResultSet moviesrs = statement.executeQuery();
             while (moviesrs.next()) {
                 Movie tempMovie = new Movie(
                     moviesrs.getInt("movieID"),
