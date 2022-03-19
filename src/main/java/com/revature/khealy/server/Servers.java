@@ -1,5 +1,6 @@
 package com.revature.khealy.server;
 
+import com.revature.khealy.server.SearchServlet.SearchServlet;
 import com.revature.khealy.servlets.DefaultServlet;
 import com.revature.khealy.servlets.LoginServlet;
 import com.revature.khealy.servlets.MovieServlet;
@@ -22,12 +23,9 @@ public class Servers {
      */
     public Servers() throws SQLException {
 
-
         server.setBaseDir("java.io.tempdir");
         server.getConnector();
         server.addContext("", null);
-
-
 
         // Page Servlets
         //--get json strings from database
@@ -41,11 +39,8 @@ public class Servers {
         server.addServlet("", "defaultServlet", new DefaultServlet()).addMapping("/*");
         server.addServlet("", "movieServlet", new MovieServlet(connection)).addMapping("/movies");
         server.addServlet("","loginServlet", new LoginServlet(connection)).addMapping("/login");
-/*
-        server.addServlet("", "teamServlet", new TeamServlet(connection)).addMapping("/teams");
-        server.addServlet("", "eventServlet", new EventServlet(connection)).addMapping("/events");
-        server.addServlet("", "registerServlet", new RegisteredServlet(connection)).addMapping("/registered");
-*/
+        server.addServlet("", "searchServlet", new SearchServlet(connection)).addMapping("/search");
+
     }
 
     /**

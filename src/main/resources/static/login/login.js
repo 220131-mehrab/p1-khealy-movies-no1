@@ -31,6 +31,4 @@ function login() {
         console.log("text sent");
         window.location.pathname = 'search/search.html';
     }).catch((error) => { console.log(error); })
-
-
 }
