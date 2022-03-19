@@ -32,7 +32,8 @@ public class SearchServlet extends HttpServlet {
         PreparedStatement stmt = null;
 
         try {
-            stmt = connection.prepareStatement("Select * from movie where imdb_id = ?");
+            String query = "select * from movie"; //""Select * from movie where imdb_id = ?"
+            stmt = connection.prepareStatement();
             stmt.setString(1, tempMovie.getImdb_id());
         } catch (SQLException e) {
             System.err.println("Error searching movies! "+e.getMessage());
@@ -43,6 +44,5 @@ public class SearchServlet extends HttpServlet {
         System.err.println(result);
         resp.setContentType("application/json");
         resp.getWriter().println(result);
-
     }
 }
