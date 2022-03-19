@@ -1,4 +1,6 @@
-package com.revature.khealy;
+package com.revature.khealy.DB;
+
+import com.revature.khealy.Movie;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
