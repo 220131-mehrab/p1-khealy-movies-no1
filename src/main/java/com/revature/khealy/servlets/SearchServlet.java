@@ -29,7 +29,7 @@ public class SearchServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         DBRetriver dbRetriver = new DBRetriver();
         Movie tempMovie = new Movie();
-        ArrayList<Movie> newMovies = new ArrayList<Movie>();
+        ArrayList<Movie> newMovies;
         PreparedStatement stmt = null;
 
         try {
@@ -37,14 +37,14 @@ public class SearchServlet extends HttpServlet {
             String query = "select * from movie where imdb_id = ?"; //""Select * from movie "
             stmt = connection.prepareStatement(query);
             stmt.setString(1, this.imdb_id);
-            stmt.executeUpdate();
+            stmt.executeQuery();
         } catch (SQLException e) {
             System.err.println("Error searching movies! "+e.getMessage());
         }
         newMovies = dbRetriver.getFromDB(stmt);
 
         String result = mapper.writeValueAsString(newMovies);
-        System.err.println(result);
+        System.err.println("result: " +result);
         resp.setContentType("application/json");
         resp.getWriter().println(result);
     }

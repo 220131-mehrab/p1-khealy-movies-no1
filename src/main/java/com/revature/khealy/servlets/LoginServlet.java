@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        System.out.println("doing post!!!");
+        System.out.println("doing login post!!!");
         ObjectMapper mapper = new ObjectMapper();
         User1 user = mapper.readValue(req.getInputStream(), User1.class);
         user.setUserID(0);

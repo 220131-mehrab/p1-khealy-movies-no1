@@ -3,6 +3,7 @@ var subHeading = 'Search';
 document.querySelector('h1').innerText = welcomeMsg;
 document.querySelector('h3').innerText = subHeading;
 
+
 function searchMovies(){
     let imdb_id = document.getElementById("imdb_id").value;
     fetch('/search', {
@@ -19,8 +20,7 @@ function searchMovies(){
         console.log("request sent");
         fetch('/search').then(resp => resp.json()).then(movies => {
             document.querySelector('#movies').innerHTML = listMovies(movies);
-        })}
-    ).catch((error) => { console.log("I got error: " + error); }
+        })}).catch((error) => { console.log("I got error: " + error); }
     );
 }
 
@@ -29,10 +29,11 @@ function listMovies(json) {
 };
 
 let listMovie = function(movie) {
-    return '<p>' + movie.movieID + ": " + movie.title + " : " + '<button type=button>Select</button></p>';
-};
+    console.log('<p>' + movie.movieID + ': ' + movie.title + ' : ' + '<button type=button onclick=\"postSelection(\'' + movie.imdb_id + '\')\">Select</button></p>');
+    return '<p>' + movie.movieID + ': ' + movie.title + ' : ' + '<button type=button onclick=\"postSelection(\'' + movie.imdb_id + '\')\">Select</button></p>'};
 
-function postSelection() {
+function postSelection(imdb_id) {
+    /*
     let movie = {
         "movieID": document.getElementById("movieID").value,
         "imdb_id": document.getElementById("imdb_id").value,
@@ -41,31 +42,31 @@ function postSelection() {
         "releaseDate": document.getElementById("releaseDate").value,
         "cost": document.getElementById("cost").value
     }
+    */
 
-    console.log(movie);
-    console.log(movie.movieID);
-    console.log(movie.imdb_id);
-    console.log(movie.title);
-    console.log(movie.overview);
-    console.log(movie.releaseDate);
-    console.log(movie.cost);
-    fetch('/movies', {
+    fetch('/search', {
         method: "POST",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(movie)
+        body: JSON.stringify(imdb_id)
     }).then((result) => {
         if (result.status != 200) {
             throw new Error("Bad Server Response");
         }
-        console.log("text sent");
-        fetch('/movies').then(resp => resp.json()).then(movies => {
-            document.querySelector('#movies').innerHTML = listMovies(movies);
+        console.log("request sent");
+        fetch('/search').then(resp => resp.json()).then(movies => {
+
+            document.querySelector('#movies').innerHTML = listMyMovie(movies);
         })}
-    ).catch((error) => { console.log("I got error: " + error); })
-}
+    ).catch((error) => { console.log("I got error: " + error); }
+    );
+};
+
+function listMyMovie(movie){
+        return '<p>You have selected: </br> ID: ' + movie.movieID + '</br>Title: ' + movie.title + '</br>ID: ' + movie.imdb_id + '<p>'
+};
 
 
 
