@@ -13,7 +13,7 @@ CREATE TABLE "user1" (
     "email" VARCHAR NOT NULL,
     "password" VARCHAR,
     "imdb_id" VARCHAR,
-    CONSTRAINT "PK_user" PRIMARY KEY ("userID"),
+    CONSTRAINT "PK_user" PRIMARY KEY ("userID")
     --CONSTRAINT "FK_userChoice" FOREIGN KEY ("imdb_id") REFERENCES "movie" ("imdb_id") ON DELETE NO ACTION ON UPDATE NO ACTION
     );
 
