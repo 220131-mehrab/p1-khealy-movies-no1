@@ -42,9 +42,9 @@ public class LoginServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         User1 user = mapper.readValue(req.getInputStream(), User1.class);
         user.setUserID(0);
-        user.setImdb_id("X");
+        user.setImdb_id("imdb3");
         try {
-            System.err.println("Inserting into DB.");
+            System.err.println("Inserting log info into DB.");
             PreparedStatement stmt = connection.prepareStatement("insert into user1 values (?,?,?,?,?)");
             stmt.setInt(1,user.getUserID());
             stmt.setString(2, user.getUserName());

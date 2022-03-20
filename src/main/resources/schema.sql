@@ -1,6 +1,6 @@
 CREATE TABLE "movie" ( 
     "movieID" INT PRIMARY KEY NOT NULL,
-    "imdb_id" VARCHAR NOT NULL,
+    "imdb_id" VARCHAR UNIQUE NOT NULL,
     "title" VARCHAR NOT NULL,
     "overview" VARCHAR,
     "releaseDate" VARCHAR,
@@ -14,7 +14,7 @@ CREATE TABLE "user1" (
     "password" VARCHAR,
     "imdb_id" VARCHAR,
     CONSTRAINT "PK_user" PRIMARY KEY ("userID"),
-    CONSTRAINT "FK_userChoice" FOREIGN KEY ("userID") REFERENCES "movie" ("movieID") ON DELETE NO ACTION ON UPDATE NO ACTION
+    --CONSTRAINT "FK_userChoice" FOREIGN KEY ("imdb_id") REFERENCES "movie" ("imdb_id") ON DELETE NO ACTION ON UPDATE NO ACTION
     );
 
 --CREATE INDEX "IFK_userChoice" ON "user1" ("userID");
