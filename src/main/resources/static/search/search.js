@@ -5,9 +5,22 @@ document.querySelector('h3').innerText = subHeading;
 
 function searchMovies(){
     let imdb_id = document.getElementById("imdb_id").value;
-    fetch('/search').then(resp => resp.json()).then(movies => {
-        document.querySelector('#movies').innerHTML = listMovies(movies);
-    }
+    fetch('/search', {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: json.stringify(imdb_id)
+    }).then((result) => {
+        if (result.status != 200) {
+            throw new Error("Bad Server Response");
+        }
+        console.log("request sent");
+        fetch('/search').then(resp => resp.json()).then(movies => {
+            document.querySelector('#movies').innerHTML = listMovies(movies);
+        })}
+    ).catch((error) => { console.log("I got error: " + error); }
     );
 }
 
@@ -42,7 +55,7 @@ function postSelection() {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-    body: JSON.stringify(movie)
+        body: JSON.stringify(movie)
     }).then((result) => {
         if (result.status != 200) {
             throw new Error("Bad Server Response");
