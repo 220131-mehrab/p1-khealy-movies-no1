@@ -11,7 +11,7 @@ function searchMovies(){
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: json.stringify(imdb_id)
+        body: JSON.stringify(imdb_id)
     }).then((result) => {
         if (result.status != 200) {
             throw new Error("Bad Server Response");
