@@ -4,6 +4,7 @@ document.querySelector('h1').innerText = welcomeMsg;
 document.querySelector('h3').innerText = subHeading;
 
 function searchMovies(){
+    let imdb_id = document.getElementById("imdb_id").value;
     fetch('/search').then(resp => resp.json()).then(movies => {
         document.querySelector('#movies').innerHTML = listMovies(movies);
     }

@@ -74,7 +74,7 @@ public class MovieServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         Movie newMovie = mapper.readValue(req.getInputStream(),Movie.class);
         try {
-            System.err.println("Inserting into DB.");
+            System.err.println("Inserting movie into DB.");
             PreparedStatement stmt = connection.prepareStatement("insert into movie values (?,?,?,?,?,?)");
             stmt.setInt(1, newMovie.getMovieID());
             stmt.setString(2, newMovie.getImdb_id());
