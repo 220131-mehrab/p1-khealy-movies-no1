@@ -52,7 +52,7 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        
+        System.err.println("Server request: " + req.toString());
         this.imdb_id = req.toString();
         
 /*         ObjectMapper mapper = new ObjectMapper();
