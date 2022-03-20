@@ -37,7 +37,7 @@ public class SearchServlet extends HttpServlet {
             String query = "select * from movie where imdb_id = ?"; //""Select * from movie "
             stmt = connection.prepareStatement(query);
             stmt.setString(1, this.imdb_id);
-            stmt.executeQuery();
+            stmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error searching movies! "+e.getMessage());
         }
