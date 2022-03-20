@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class SearchServlet extends HttpServlet {
     Connection connection;
+    String imdb_id;
 
     public SearchServlet(Connection connection) {
         this.connection = connection;
@@ -35,7 +36,7 @@ public class SearchServlet extends HttpServlet {
             System.err.println("Searching for imdb_id...");
             String query = "select * from movie where imdb_id = ?"; //""Select * from movie "
             stmt = connection.prepareStatement(query);
-            stmt.setString(1, tempMovie.getImdb_id());
+            stmt.setString(1, this.imdb_id);
 
         } catch (SQLException e) {
             System.err.println("Error searching movies! "+e.getMessage());
@@ -46,5 +47,28 @@ public class SearchServlet extends HttpServlet {
         System.err.println(result);
         resp.setContentType("application/json");
         resp.getWriter().println(result);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        
+        this.imdb_id = req.toString();
+        
+/*         ObjectMapper mapper = new ObjectMapper();
+        Movie newMovie = mapper.readValue(req.getInputStream(),Movie.class);
+        try {
+            System.err.println("Inserting movie into DB.");
+            PreparedStatement stmt = connection.prepareStatement("insert into movie values (?,?,?,?,?,?)");
+            stmt.setInt(1, newMovie.getMovieID());
+            stmt.setString(2, newMovie.getImdb_id());
+            stmt.setString(3, newMovie.getTitle());
+            stmt.setString(4, newMovie.getRelesedate());
+            stmt.setString(5, newMovie.getOverview());
+            stmt.setFloat(6, newMovie.getCost());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Failed to insert: " + e.getMessage());
+        } */
     }
 }
