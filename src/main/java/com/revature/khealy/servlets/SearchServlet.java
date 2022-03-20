@@ -52,12 +52,12 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        System.err.println("doing Post of server request...");
+/*        System.err.println("doing Post of server request...");
         System.err.println("Server request: " + req.toString());
-        this.imdb_id = req.toString();
+        this.imdb_id = req.toString();*/
         
         ObjectMapper mapper = new ObjectMapper();
-        Movie newMovie = mapper.readValue(req.getInputStream(),Movie.class);
+        this.imdb_id = mapper.readValue(req.getInputStream(),String.class);
 
 /*
         try {
