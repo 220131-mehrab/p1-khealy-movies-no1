@@ -33,16 +33,16 @@ let listMovie = function(movie) {
     return '<p>' + movie.movieID + ': ' + movie.title + ' : ' + '<button type=button onclick=\"postSelection(\'' + movie.imdb_id + '\')\">Select</button></p>'};
 
 function postSelection(imdb_id) {
-    /*
-    let movie = {
-        "movieID": document.getElementById("movieID").value,
-        "imdb_id": document.getElementById("imdb_id").value,
-        "title": document.getElementById("title").value,
-        "overview": document.getElementById("overview").value,
-        "releaseDate": document.getElementById("releaseDate").value,
-        "cost": document.getElementById("cost").value
-    }
-    */
+
+     let movie = {
+         movieID: 0,
+         imdb_id: "X",
+//         var title,
+//         var overview,
+//         var releaseDate,
+//         var cost
+     }
+
 
     fetch('/search', {
         method: "POST",
@@ -58,14 +58,15 @@ function postSelection(imdb_id) {
         console.log("request sent");
         fetch('/search').then(resp => resp.json()).then(movie => {
             console.log(listMovies(movie));
-            document.querySelector('#movies').innerHTML = listMovies(movie)
+            document.querySelector('#movies').innerHTML = listMyMovies(movie)
         })}
     ).catch((error) => { console.log("I got error: " + error); }
     );
 };
-function listMovies(json) {
-    return `${json.map(listMyMovie(movie)).join('\n')}`;
+function listMyMovies(json) {
+    return `${json.map(listMyMovie).join('\n')}`;
 };
+
 function listMyMovie(movie){
         return '<p>You have selected: </br> ID: ' + movie.movieID + '</br>Title: ' + movie.title + '</br>ID: ' + movie.imdb_id + '<p>'
 };
