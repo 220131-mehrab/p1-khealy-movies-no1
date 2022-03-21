@@ -56,14 +56,16 @@ function postSelection(imdb_id) {
             throw new Error("Bad Server Response");
         }
         console.log("request sent");
-        fetch('/search').then(resp => resp.json()).then(movies => {
-
-            document.querySelector('#movies').innerHTML = listMyMovie(movies);
+        fetch('/search').then(resp => resp.json()).then(movie => {
+            console.log(listMovies(movie));
+            document.querySelector('#movies').innerHTML = listMovies(movie)
         })}
     ).catch((error) => { console.log("I got error: " + error); }
     );
 };
-
+function listMovies(json) {
+    return `${json.map(listMyMovie(movie)).join('\n')}`;
+};
 function listMyMovie(movie){
         return '<p>You have selected: </br> ID: ' + movie.movieID + '</br>Title: ' + movie.title + '</br>ID: ' + movie.imdb_id + '<p>'
 };

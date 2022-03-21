@@ -33,10 +33,12 @@ public class SearchServlet extends HttpServlet {
         PreparedStatement stmt = null;
 
         try {
-            System.err.println("Searching for imdb_id...");
+            System.err.println("Searching for imdb_id...: "+ imdb_id);
             String query = "select * from movie where imdb_id = ?"; //""Select * from movie "
             stmt = connection.prepareStatement(query);
-            stmt.setString(1, this.imdb_id);
+            stmt.setString(1, imdb_id);
+            System.err.println(stmt.toString());
+            System.err.println(query);
             stmt.executeQuery();
         } catch (SQLException e) {
             System.err.println("Error searching movies! "+e.getMessage());
@@ -45,8 +47,13 @@ public class SearchServlet extends HttpServlet {
 
         String result = mapper.writeValueAsString(newMovies);
         System.err.println("result: " +result);
+        //resp.setContentType("application/json");
+        resp.getWriter().println(result);
+        /*
         resp.setContentType("application/json");
         resp.getWriter().println(result);
+
+         */
     }
 
     @Override
