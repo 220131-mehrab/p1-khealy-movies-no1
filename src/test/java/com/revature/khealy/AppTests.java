@@ -89,7 +89,7 @@ public class AppTests {
 
         mve = Movie.of().movieID(1).title("No Highway in the Sky").imdb_id("xxxxxxsky").overview("James Steuwart Saves the day.").releaseDate("1-1-1950").cost(1);
         System.err.println("running test for movie assignment: "+ mve.toString());
-        Assertions.assertEquals("Movie [movieID=1, imdb_id=xxxxxxsky, overview=James Steuwart Saves the day., releaseDate=1-1-1950, title=No Highway in the Sky, cost=1.0]",mve.toString());
+        Assertions.assertEquals("Movie [movieID=1, imdb_id=xxxxxxsky, title=No Highway in the Sky, overview=James Steuwart Saves the day., releaseDate=1-1-1950, cost=1.0]",mve.toString());
 
     }
 }
