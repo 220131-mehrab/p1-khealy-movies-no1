@@ -6,7 +6,6 @@ document.querySelector('h3').innerText = subHeading;
 function login() {
     console.log("im starting login")
     let User1 = {
-        "userID": document.getElementById("userID").value,
         "userName": document.getElementById("userName").value,
         "email": document.getElementById("email").value,
         "password": document.getElementById("password").value,

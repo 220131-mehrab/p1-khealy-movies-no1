@@ -79,8 +79,8 @@ public class MovieServlet extends HttpServlet {
             stmt.setInt(1, newMovie.getMovieID());
             stmt.setString(2, newMovie.getImdb_id());
             stmt.setString(3, newMovie.getTitle());
-            stmt.setString(4, newMovie.getRelesedate());
-            stmt.setString(5, newMovie.getOverview());
+            stmt.setString(4, newMovie.getOverview());
+            stmt.setString(5, newMovie.getRelesedate());
             stmt.setFloat(6, newMovie.getCost());
             stmt.executeUpdate();
         } catch (SQLException e) {

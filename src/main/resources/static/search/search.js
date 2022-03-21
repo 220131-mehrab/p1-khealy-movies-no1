@@ -37,10 +37,10 @@ function postSelection(imdb_id) {
      let movie = {
          movieID: 0,
          imdb_id: "X",
-//         var title,
-//         var overview,
-//         var releaseDate,
-//         var cost
+         title: "x",
+         overview: "x",
+         releaseDate: "x",
+         cost: 0
      }
 
 
@@ -68,8 +68,10 @@ function listMyMovies(json) {
 };
 
 function listMyMovie(movie){
-        return '<p>You have selected: </br> ID: ' + movie.movieID + '</br>Title: ' + movie.title + '</br>ID: ' + movie.imdb_id + '<p>'
+        return '<p>Thank you for your order.  You have selected: </br> ID: ' + movie.movieID + '</br>Title: ' + movie.title + '</br>IMDB_ID: ' + movie.imdb_id +  '</br>' +
+        'overview: ' + movie.overview + '</br>' + 'Releasedate: ' + movie.releaseDate + '</br>'+ movie.cost + '<p>'
 };
+
 
 
 
