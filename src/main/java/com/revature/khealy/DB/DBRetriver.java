@@ -23,13 +23,13 @@ public class DBRetriver {
     public void insertIntoDB(Movie newMovie,Connection connection) {
         try{
             System.err.println("Inserting " + newMovie.toString() + " Into DB.");
-
-            PreparedStatement stmt = connection.prepareStatement("insert into movie values (?,?,?,?,?,?)");
+            //------------------------------------------------------------------------------//(md,imdb, tt,ov,rd,ct)
+            PreparedStatement stmt = connection.prepareStatement("insert into movie values (?,    ?, ?, ?, ?, ?)");
             stmt.setInt(1, newMovie.getMovieID());
             stmt.setString(2, newMovie.getImdb_id());
             stmt.setString(3, newMovie.getTitle());
-            stmt.setString(4, newMovie.getRelesedate());
-            stmt.setString(5, newMovie.getOverview());
+            stmt.setString(4, newMovie.getOverview());
+            stmt.setString(5, newMovie.getRelesedate());
             stmt.setFloat(6, newMovie.getCost());
             stmt.executeUpdate();
 

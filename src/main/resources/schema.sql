@@ -17,7 +17,6 @@ CREATE TABLE "user1" (
     --CONSTRAINT "FK_userChoice" FOREIGN KEY ("imdb_id") REFERENCES "movie" ("imdb_id") ON DELETE NO ACTION ON UPDATE NO ACTION
     );
 
-
 --CREATE INDEX "IFK_userChoice" ON "user1" ("userID");
 
 INSERT INTO "movie" VALUES(1, 'XXXXSKY1', 'No Highway1', 'plane crashed1', '1-1-1950', 1);
