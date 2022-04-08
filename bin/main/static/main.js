@@ -47,7 +47,7 @@ function postMovie() {
         fetch('/movies').then(resp => resp.json()).then(movies => {
             document.querySelector('#movies').innerHTML = listMovies(movies);
         })}
-    ).catch((error) => { console.log(error); })
+    ).catch((error) => { console.log("I got error: " + error); })
 }
 /*
 function toLogin(){
